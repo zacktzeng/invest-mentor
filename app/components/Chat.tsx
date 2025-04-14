@@ -52,7 +52,7 @@ const Chat = () => {
   };
 
   return (
-    <div ref={chatContainer} className="chat">
+    <div ref={chatContainer} className="chat w-full">
       {renderResponse()}
       <form onSubmit={handleSubmit} className="chat-form">
         <input
