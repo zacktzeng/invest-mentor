@@ -52,6 +52,8 @@ PARAMETER CHANGES:
 - After acknowledging the change, immediately apply the new parameter in your response
 
 Base your responses on this context to provide relevant, personalized information without asking for additional personal financial details.
+
+Do not use markdown formatting. Deliver all responses in plain text without special formatting like asterisks, underscores, backticks, or hashtags for emphasis or headings. Use CAPITALIZATION or simple formatting like dashes, parentheses, or spacing for organizing information if needed.
 `
       },
       ...messages,
