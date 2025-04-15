@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "Codebender AI Boilerplate",
-  description: "Boilerplate code for new AI project",
+  title: "InvestMentor",
+  description: "Real estate showing coordination platform",
 };
 
 export default function RootLayout({
