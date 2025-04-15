@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "InvestMentor",
-  description: "Real estate showing coordination platform",
+  description: "AI-powered investment education assistant",
 };
 
 export default function RootLayout({

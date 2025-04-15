@@ -1,41 +1,86 @@
-# Codebender AI Boilerplate
+# InvestMentor
 
-This project is a boilerplate code to start your next AI app.
+An AI-powered investment education assistant that provides personalized learning experiences for users of all experience levels.
 
-It will set up a simple AI chatbot hooked to the OpenAI API.
+## Project Description
 
-This project is built using Nextjs. It utilizes the OpenAI GPT4 for chat completion.
+InvestMentor is an interactive platform designed to help users understand investment concepts through personalized AI-guided conversations. The application adapts its explanations based on the user's experience level and preferred learning style, making complex financial concepts more accessible to everyone.
 
-<img src="app-screenshot.png" alt="app demo" width=600>
+Whether you're a complete beginner looking for simple explanations or an experienced investor wanting detailed terminology, InvestMentor tailors its responses to match your needs and learning preferences.
 
-## Suggestions
+## Features
 
-If you have any suggestions on how to improve this boilerplate, send me an email at zaurbek@thecodebender.com or post it in our Discord server.
+- **Personalized Learning**: Customize your experience based on:
+  - Experience level (beginner, some knowledge, experienced)
+  - Learning style preference (simple, visual, scenario-based, terminology)
 
-Happy to improve it!
+- **Adaptive AI Responses**: Receive investment education tailored to your specific preferences
+
+- **Dynamic Preference Updates**: Change your learning preferences at any time during your session
+
+- **Interactive Chat Interface**: Ask questions and receive informative responses about investment topics
+
+## Technology Stack
+
+- Next.js 14
+- TypeScript
+- OpenAI API
+- Tailwind CSS
+- Vercel AI SDK
 
 ## Getting Started
 
-First, duplicate the `.env` file into a new file named `.env.local`. Update the value of your [OpenAI API key](https://platform.openai.com/api-keys) there.
+### Prerequisites
 
-The first time you are running this project, you will need to install the dependencies. Run this command in your terminal:
+- Node.js 18.x or higher
+- npm or yarn
+- OpenAI API key
 
-```bash
-yarn
-```
+### Installation
 
-To start the app, run:
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/investmentor.git
+   cd investmentor
+   ```
 
-```bash
-yarn dev
-```
+2. Install dependencies:
+   ```
+   npm install
+   # or
+   yarn
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Create a `.env.local` file in the root directory and add your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Start the development server:
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-## Deploy on Vercel
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Select your investment experience level and preferred learning style in the sidebar
+2. Type your investment-related questions in the chat input
+3. Receive personalized explanations tailored to your preferences
+4. Adjust your preferences at any time to change how information is presented
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- OpenAI for providing the AI capabilities
+- Next.js team for the amazing framework
