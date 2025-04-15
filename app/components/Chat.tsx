@@ -33,13 +33,11 @@ const Chat = () => {
 
   const chatContainer = useRef<HTMLDivElement>(null);
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const scroll = () => {
-    if (chatContainer.current) {
-      const { offsetHeight, scrollHeight, scrollTop } = chatContainer.current;
-      if (scrollHeight >= scrollTop + offsetHeight) {
-        chatContainer.current.scrollTo(0, scrollHeight + 200);
-      }
-    }
+    console.log("Scrolling to the bottom of the chat");
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Update system message when parameters change
@@ -88,9 +86,11 @@ const Chat = () => {
                 <div className="horizontal-line" />
               )}
             </div>
+            <div ref={messagesEndRef} />
           </div>
         ))}
       </div>
+
     );
   };
 
@@ -107,6 +107,7 @@ const Chat = () => {
         />
         <button type="submit" className="send-button" />
       </form>
+
     </div>
   );
 };
