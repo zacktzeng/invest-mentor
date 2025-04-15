@@ -10,9 +10,10 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request, res: Response) {
-  // Extract the `prompt` from the body of the request
-  const { messages } = await req.json();
+  // Extract the messages and other parameters from the body
+  const { messages, experienceLevel, learningStyle } = await req.json();
   console.log("messages:", messages);
+  console.log("Parameters:", { experienceLevel, learningStyle });
 
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
@@ -34,22 +35,14 @@ GUIDELINES:
 
 LEARNING STYLE ADAPTATION:
 - When user prefers "simple": Use everyday analogies and plain language, avoid technical terms
-- When user prefers "visual": Describe information in terms of charts, graphs, and visual relationships
 - When user prefers "scenario": Present examples through realistic scenarios (e.g., "Imagine you invested $100 in...")
 - When user prefers "terminology": Define key terms precisely with their proper context
 
 USER CONTEXT:
 The user has provided information about their:
-- Investment experience level: {{experience_level}}
-- Areas of interest: {{investment_types}}
-- Learning goals: {{learning_objective}}
-- Preferred learning style: {{learning_style}}
+- Investment experience level: ${experienceLevel}
+- Preferred learning style: ${learningStyle}
 
-PARAMETER CHANGES:
-- When any user parameter changes during the conversation, acknowledge this change explicitly
-- Format your acknowledgment as: "I notice you've updated your [parameter name] to [new value]. I'll adjust my explanations accordingly."
-- Example: "I notice you've updated your learning style to 'visual'. I'll adjust my explanations accordingly."
-- After acknowledging the change, immediately apply the new parameter in your response
 
 Base your responses on this context to provide relevant, personalized information without asking for additional personal financial details.
 
