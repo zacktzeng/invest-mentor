@@ -91,7 +91,7 @@ const Chat = () => {
                     ? "bg-primary text-primary-foreground ml-auto" 
                     : "bg-muted"
                 }`}>
-                  <p className="text-sm">{m.content}</p>
+                  <p className="text-sm whitespace-pre-wrap">{m.content}</p>
                 </div>
                 
                 {m.role === "user" && (
