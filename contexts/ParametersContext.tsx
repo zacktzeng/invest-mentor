@@ -3,8 +3,8 @@
 
 import { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
-type ExperienceLevel = "beginner" | "some_knowledge" | "experienced";
-type LearningStyle = "simple" | "scenario" | "terminology";
+export type ExperienceLevel = "beginner" | "some_knowledge" | "experienced";
+export type LearningStyle = "simple" | "scenario" | "terminology";
 
 interface ParametersContextType {
   experienceLevel: ExperienceLevel;

@@ -1,14 +1,20 @@
 // Chat.tsx
 import { useChat } from "ai/react";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { useParameters } from "@/contexts/ParametersContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Send } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
 const Chat = () => {
   const {
     experienceLevel,
     learningStyle,
-    lastUpdated,
     parameterChanged,
     acknowledgeParameterChange
   } = useParameters();
@@ -31,12 +37,9 @@ const Chat = () => {
     }
   });
 
-  const chatContainer = useRef<HTMLDivElement>(null);
-
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scroll = () => {
-    console.log("Scrolling to the bottom of the chat");
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -56,59 +59,74 @@ const Chat = () => {
 
   // Create a custom submit handler that wraps the original
   const handleCustomSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     handleSubmit(e);
   };
 
-  const renderResponse = () => {
-    return (
-      <div className="response">
+  return (
+    <Card className="flex flex-col h-[70vh] md:h-[80vh]">
+      {/* Chat message area with scroll */}
+      <ScrollArea className="flex-grow p-4">
         {systemMessage && (
-          <div className="system-message text-xs text-gray-500 italic mb-2">
-            {systemMessage}
-          </div>
+          <Alert className="mb-4">
+            <AlertDescription className="text-xs text-muted-foreground">
+              {systemMessage}
+            </AlertDescription>
+          </Alert>
         )}
-        {messages.map((m, index) => (
-          <div
-            key={m.id}
-            className={`chat-line ${m.role === "user" ? "user-chat" : "ai-chat"
-              }`}
-          >
-            <Image
-              className="avatar"
-              alt="avatar"
-              width={40}
-              height={40}
-              src={m.role === "user" ? "/user-avatar.jpg" : "/ai-avatar.png"}
-            />
-            <div style={{ width: "100%", marginLeft: "16px" }}>
-              <p className="message">{m.content}</p>
+        
+        <div className="space-y-4">
+          {messages.map((m, index) => (
+            <div key={m.id}>
+              <div className={`flex items-start gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                {m.role !== "user" && (
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="/ai-avatar.png" alt="AI" />
+                    <AvatarFallback>AI</AvatarFallback>
+                  </Avatar>
+                )}
+                
+                <div className={`rounded-lg p-3 max-w-[80%] ${
+                  m.role === "user" 
+                    ? "bg-primary text-primary-foreground ml-auto" 
+                    : "bg-muted"
+                }`}>
+                  <p className="text-sm">{m.content}</p>
+                </div>
+                
+                {m.role === "user" && (
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="/user-avatar.jpg" alt="User" />
+                    <AvatarFallback>You</AvatarFallback>
+                  </Avatar>
+                )}
+              </div>
+              
               {index < messages.length - 1 && (
-                <div className="horizontal-line" />
+                <Separator className="my-4" />
               )}
             </div>
-            <div ref={messagesEndRef} />
-          </div>
-        ))}
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+      </ScrollArea>
+      
+      {/* Input area */}
+      <div className="p-4 border-t">
+        <form onSubmit={handleCustomSubmit} className="flex gap-2">
+          <Input
+            name="input-field"
+            placeholder="Ask about investing..."
+            onChange={handleInputChange}
+            value={input}
+            className="flex-grow"
+          />
+          <Button type="submit" size="icon">
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
       </div>
-
-    );
-  };
-
-  return (
-    <div ref={chatContainer} className="chat w-full">
-      {renderResponse()}
-      <form onSubmit={handleCustomSubmit} className="chat-form">
-        <input
-          name="input-field"
-          type="text"
-          placeholder="Ask about investing..."
-          onChange={handleInputChange}
-          value={input}
-        />
-        <button type="submit" className="send-button" />
-      </form>
-
-    </div>
+    </Card>
   );
 };
 
