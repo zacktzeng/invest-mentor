@@ -1,27 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import Chat from "./components/Chat";
-import InvestmentParameterForm from "@/app/components/InvestmentParameterForm";
+import InvestmentParameterForm from "./components/InvestmentParameterForm";
+import ResponsiveLayout from "./components/ResponsiveLayout";
 import { ParametersProvider } from "@/contexts/ParametersContext";
 
 export default function Home() {
   return (
     <ParametersProvider>
-      <main className="w-screen h-screen">
-        <div>
-          <p className="text-3xl font-bold text-center p-10">
+      <main className="w-full min-h-screen p-4 md:p-6 lg:p-10">
+        <div className="mb-6 md:mb-10">
+          <h1 className="text-2xl md:text-3xl font-bold text-center">
             InvestMentor
-          </p>
+          </h1>
         </div>
-        <div className="flex gap-10 px-10 w-full grid grid-cols-3 relative">
-          <div className="flex flex-col items-center relative col-span-1">
-            <InvestmentParameterForm />
-          </div>
-          <div className="items-center relative col-span-2">
-            <Chat />
-          </div>
-        </div>
+        
+        <ResponsiveLayout 
+          sidebarContent={<InvestmentParameterForm />}
+          mainContent={<Chat />}
+        />
       </main>
     </ParametersProvider>
   );
